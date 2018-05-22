@@ -18,6 +18,7 @@ namespace KeywordDrivenFramework.CommonRepository
         }
         public enum LogStatus
         {
+            Info,
             Inconclusive,
             Skipped,
             Passed,

@@ -54,10 +54,10 @@ namespace KeywordDrivenFramework.CommonRepository
                             resultStatus = navigate();
                             break;
                         case "click":
-                            resultStatus = ClickOnElementWhenElementFound(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault());
+                            resultStatus = ClickOnElementWhenElementFound(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault(), locatorName);
                             break;
                         case "input":
-                            resultStatus = SendKeysForElement(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault(), data);
+                            resultStatus = SendKeysForElement(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault(), data,locatorName);
                             break;
                     }
                     if (!resultStatus.Equals(Enum.LogStatus.Passed))

@@ -1,4 +1,5 @@
-﻿using AventStack.ExtentReports;
+﻿
+using AventStack.ExtentReports;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -32,9 +33,9 @@ namespace KeywordDrivenFramework.CommonRepository
         public string TestCaseName = string.Empty;
         public static string browserName = string.Empty;
         Enum.LogStatus status;
-
         public Enum.LogStatus openBrowser(string bType)
         {
+            test.Log(Status.Info, "Opening browser- " + bType);
             try
             {
                 if (ConfigurationManager.AppSettings["grid"].Equals("Y"))
@@ -79,7 +80,7 @@ namespace KeywordDrivenFramework.CommonRepository
         {
             try
             {
-                //test.Log(LogStatus.Info, "Navigating to " + ConfigurationManager.AppSettings["URL"]);
+                test.Log(Status.Info, "Navigating to - " + ConfigurationManager.AppSettings["URL"]);
                 driver.Url = ConfigurationManager.AppSettings["URL"];
                 return Enum.LogStatus.Passed;
             }
@@ -90,7 +91,7 @@ namespace KeywordDrivenFramework.CommonRepository
 
         }
 
-        public IWebElement getElement(string locatorKey,string locatorValue)
+        public IWebElement getElement(string locatorKey, string locatorValue)
         {
             IWebElement e = null;
             try
@@ -139,7 +140,7 @@ namespace KeywordDrivenFramework.CommonRepository
             int iTimer = 0;
             while (iTimer <= timeOut)
             {
-                bool status = IsElementVisible(aStringType,aStringeValue);
+                bool status = IsElementVisible(aStringType, aStringeValue);
                 if (status)
                     return true;
             }
@@ -166,14 +167,15 @@ namespace KeywordDrivenFramework.CommonRepository
         }
         public string getTextOfWebElementByLocator(String aStringType, String aWebElementID)
         {
-            return getWebElementByLocator(aStringType,aWebElementID).Text;
+            return getWebElementByLocator(aStringType, aWebElementID).Text;
         }
 
-        public Enum.LogStatus ClickOnElementWhenElementFound(String aStringType, String aStringValue)
+        public Enum.LogStatus ClickOnElementWhenElementFound(String aStringType, String aStringValue, String aStringName)
         {
+            test.Log(Status.Info, "Clicking on -" + aStringName);
             try
             {
-                IWebElement webElement = getWebElementByLocator(aStringType,aStringValue);
+                IWebElement webElement = getWebElementByLocator(aStringType, aStringValue);
                 webElement.Click();
                 return status = Enum.LogStatus.Passed;
             }
@@ -182,11 +184,12 @@ namespace KeywordDrivenFramework.CommonRepository
                 return status = Enum.LogStatus.Failed;
             }
         }
-        public Enum.LogStatus SendKeysForElement(String aStringType,String aStringValue, String aTestData)
+        public Enum.LogStatus SendKeysForElement(String aStringType, String aStringValue, String aTestData,String aStringName)
         {
+            test.Log(Status.Info, "Entering into - " + aStringName);
             try
             {
-                getElement(aStringType,aStringValue).SendKeys(aTestData);
+                getElement(aStringType, aStringValue).SendKeys(aTestData);
                 return status = Enum.LogStatus.Passed;
             }
             catch (ElementNotVisibleException e)
@@ -199,8 +202,9 @@ namespace KeywordDrivenFramework.CommonRepository
                 return status = Enum.LogStatus.Failed;
             }
         }
-        public Enum.LogStatus SendKeysForWebElement(String aStringType, String aStringValue, String aTestData)
+        public Enum.LogStatus SendKeysForWebElement(String aStringType, String aStringValue, String aTestData,String aStringName)
         {
+            test.Log(Status.Info, "Entering into - " + aStringName);
             try
             {
                 getElement(aStringType, aStringValue).Clear();
@@ -242,7 +246,7 @@ namespace KeywordDrivenFramework.CommonRepository
             int iTimer = 0;
             while (iTimer <= timeOut)
             {
-                bool status = !(IsElementVisible(aStringType,aStringeValue));
+                bool status = !(IsElementVisible(aStringType, aStringeValue));
                 if (status)
                     return true;
             }
@@ -252,7 +256,7 @@ namespace KeywordDrivenFramework.CommonRepository
         {
             try
             {
-                getElement(aStringType,aStringValue);
+                getElement(aStringType, aStringValue);
                 return true;
             }
             catch (NoSuchElementException)
@@ -278,11 +282,11 @@ namespace KeywordDrivenFramework.CommonRepository
             Actions act = new Actions(driver);
             act.MoveToElement(getElement(aStringType, aStringValue)).Click();
         }
-        public string selectValueFromDropdownStringText(String aStringType,String aStringValue, string value)
+        public string selectValueFromDropdownStringText(String aStringType, String aStringValue, string value)
         {
             try
             {
-                SelectElement oSelect = new SelectElement(getElement(aStringType,aStringValue));
+                SelectElement oSelect = new SelectElement(getElement(aStringType, aStringValue));
                 oSelect.SelectByText(value);
                 return value;
             }
@@ -291,11 +295,11 @@ namespace KeywordDrivenFramework.CommonRepository
                 return null;
             }
         }
-        public int selectValueStringIndex(String aStringType,String aStringValue, int index)
+        public int selectValueStringIndex(String aStringType, String aStringValue, int index)
         {
             try
             {
-                SelectElement oSelect = new SelectElement(getElement(aStringType,aStringValue));
+                SelectElement oSelect = new SelectElement(getElement(aStringType, aStringValue));
                 oSelect.SelectByIndex(index);
                 return index;
             }
@@ -308,7 +312,7 @@ namespace KeywordDrivenFramework.CommonRepository
         {
             try
             {
-                Assert.AreEqual(getTextOfWebElementByLocator(aStringType,expected), actual);
+                Assert.AreEqual(getTextOfWebElementByLocator(aStringType, expected), actual);
                 return status = Enum.LogStatus.Passed;
             }
             catch (Exception)

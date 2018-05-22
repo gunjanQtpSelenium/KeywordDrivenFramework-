@@ -10,7 +10,7 @@ namespace TestFramework.Base
 {
     public class BaseTest
     {
-        //   public ExtentReports rep = ExtentManager.getInstance();
+        //public ExtentReports rep = ExtentManager.getInstance();
         public ExtentTest test;
         public Keywords app = null;
         public static ExcelReader xls = new ExcelReader(GeneralMethod.GetExcelPath());

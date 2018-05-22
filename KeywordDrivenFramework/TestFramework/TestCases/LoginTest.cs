@@ -15,7 +15,7 @@ namespace TestFramework.TestCases
         [Test, TestCaseSource("getData")]
         public void LoginTestScenario(Dictionary<string, string> data)
         {
-            //test = rep.StartTest("FilterMobile Test");
+            //test = rep.CreateTest("FilterMobile Test");
             if (DataUtility.isSkip(xls, Enum.TestCaseName.LoginTest.ToString()) || data["Runmode"].Equals("N"))
             {
                 //test.Log(LogStatus.Skip, "Skipping the test as runmode is NO");

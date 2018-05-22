@@ -108,6 +108,8 @@
     <Compile Include="CommonRepository\GeneralMethod.cs" />
     <Compile Include="CommonRepository\Keywords.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportReader\ExtentManager.cs" />
+    <Compile Include="ReportReader\ExtentTestManager.cs" />
     <Compile Include="TestDataClasses\LoginPage.cs" />
   </ItemGroup>
   <ItemGroup>
