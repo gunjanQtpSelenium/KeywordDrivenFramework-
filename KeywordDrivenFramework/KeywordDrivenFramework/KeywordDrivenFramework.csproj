@@ -111,6 +111,7 @@
     <Compile Include="ReportReader\ExtentManager.cs" />
     <Compile Include="ReportReader\ExtentTestManager.cs" />
     <Compile Include="TestDataClasses\RegistrationPage.cs" />
+    <Compile Include="TestDataClasses\SearchItemPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="license" />
