@@ -68,6 +68,12 @@ namespace KeywordDrivenFramework.CommonUtilities
                         case "hoverClick":
                             resultStatus = mouseHover(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault());
                             break;
+                        case "jsClick":
+                            resultStatus = jsClick(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault());
+                            break;
+                        case "inputAndEnter":
+                            resultStatus = SendKeysForAElement(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault(), data, locatorName);
+                            break;
                     }
                     if (!resultStatus.Equals(Enum.LogStatus.Passed))
                     {
