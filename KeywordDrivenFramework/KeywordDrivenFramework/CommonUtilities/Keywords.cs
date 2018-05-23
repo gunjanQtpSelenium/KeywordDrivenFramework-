@@ -57,7 +57,7 @@ namespace KeywordDrivenFramework.CommonUtilities
                             resultStatus = ClickOnElementWhenElementFound(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault(), locatorName);
                             break;
                         case "input":
-                            resultStatus = SendKeysForElement(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault(), data, locatorName);
+                            resultStatus = SendKeysForElement(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault(), data,locatorName);
                             break;
                         case "wait":
                             resultStatus = threadWait(5000);
@@ -65,11 +65,8 @@ namespace KeywordDrivenFramework.CommonUtilities
                         case "hover":
                             resultStatus = mouseHoverWithoutClick(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault(), locatorName);
                             break;
-                        case "jsClick":
-                            resultStatus = jsClick(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault());
-                            break;
-                        case "inputAndEnter":
-                            resultStatus = SendKeysForAElement(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault(), data, locatorName);
+                        case "hoverClick":
+                            resultStatus = mouseHover(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault());
                             break;
                     }
                     if (!resultStatus.Equals(Enum.LogStatus.Passed))

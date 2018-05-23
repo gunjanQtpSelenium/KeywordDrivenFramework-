@@ -160,7 +160,7 @@ namespace KeywordDrivenFramework.CommonUtilities
                 webElement.Click();
                 return status = Enum.LogStatus.Passed;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return status = Enum.LogStatus.Failed;
             }
@@ -277,10 +277,11 @@ namespace KeywordDrivenFramework.CommonUtilities
                 return null;
             }
         }
-        public void mouseHover(String aStringType, String aStringValue)
+        public Enum.LogStatus mouseHover(String aStringType, String aStringValue)
         {
             Actions act = new Actions(driver);
             act.MoveToElement(getElement(aStringType, aStringValue)).Click();
+            return Enum.LogStatus.Passed;
         }
         public string selectValueFromDropdownStringText(String aStringType, String aStringValue, string value)
         {
@@ -510,10 +511,10 @@ namespace KeywordDrivenFramework.CommonUtilities
             try
             {
                 Actions action = new Actions(driver);
-                action.MoveToElement(getElement(aStringType, aStringValue)).Perform();
+                action.MoveToElement(getElement(aStringType, aStringValue)).Build().Perform();
                 return Enum.LogStatus.Passed;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return Enum.LogStatus.Failed;
             }
