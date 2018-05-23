@@ -11,16 +11,22 @@ namespace TestFramework.TestCases
     [TestFixture]
     public class RegistrationTest : BaseTest
     {
-
         [Test, TestCaseSource("getData")]
-        public void LoginTestScenario(Dictionary<string, string> data)
+        public void RegistrationTestScenario(Dictionary<string, string> data)
         {
-            if (DataUtility.isSkip(xls, Enum.TestCaseName.RegistrationTest.ToString()) || data["Runmode"].Equals("N"))
+            try
             {
-                Assert.Ignore("Skipping the test as runmode is NO");
+                if (DataUtility.isSkip(xls, Enum.TestCaseName.RegistrationTest.ToString()) || data["Runmode"].Equals("N"))
+                {
+                    Assert.Ignore("Skipping the test as runmode is NO");
+                }
+                app = new Keywords(test);
+                app.executeKeywords(Enum.TestCaseName.RegistrationTest.ToString(), xls, data);
             }
-            app = new Keywords(test);
-            app.executeKeywords(Enum.TestCaseName.RegistrationTest.ToString(), xls, data);
+            catch (System.Exception)
+            {
+                Assert.Fail("");
+            }
         }
 
         /// <summary>

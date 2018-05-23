@@ -65,6 +65,9 @@ namespace KeywordDrivenFramework.CommonUtilities
                         case "hover":
                             resultStatus = mouseHoverWithoutClick(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault(), locatorName);
                             break;
+                        case "hoverClick":
+                            resultStatus = mouseHover(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault());
+                            break;
                     }
                     if (!resultStatus.Equals(Enum.LogStatus.Passed))
                     {

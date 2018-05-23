@@ -111,8 +111,8 @@ namespace KeywordDrivenFramework.CommonUtilities
                     string locatorValueKey = xls.getCellData(LocatorSheet, Enum.LocatorsColumn.LocatorType.ToString(), rNum);
                     string locatorValue = xls.getCellData(LocatorSheet, Enum.LocatorsColumn.LocatorValue.ToString(), rNum);
                     table.Add(locatorValueKey, locatorValue);
+                    return table;
                 }
-                return table;
             }
             return table;
         }
