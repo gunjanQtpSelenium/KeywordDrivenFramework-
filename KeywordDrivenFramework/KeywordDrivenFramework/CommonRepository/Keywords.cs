@@ -59,6 +59,9 @@ namespace KeywordDrivenFramework.CommonRepository
                         case "input":
                             resultStatus = SendKeysForElement(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault(), data,locatorName);
                             break;
+                        case "wait":
+                            resultStatus = threadWait(5000);
+                            break;
                     }
                     if (!resultStatus.Equals(Enum.LogStatus.Passed))
                     {

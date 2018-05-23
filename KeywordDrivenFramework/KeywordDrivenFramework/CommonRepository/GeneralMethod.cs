@@ -35,38 +35,17 @@ namespace KeywordDrivenFramework.CommonRepository
         Enum.LogStatus status;
         public Enum.LogStatus openBrowser(string bType)
         {
-            test.Log(Status.Info, "Opening browser- " + bType);
+            //  test.Log(Status.Info, "Opening browser- " + bType);
             try
             {
-                if (ConfigurationManager.AppSettings["grid"].Equals("Y"))
-                {
-                    DesiredCapabilities cap = null;
-                    if (bType.Equals("Mozilla"))
-                    {
-                        cap = DesiredCapabilities.Firefox();
-                        cap.SetCapability(CapabilityType.BrowserName, "firefox");
 
-                        cap.SetCapability(CapabilityType.Platform, "WINDOWS");
-                    }
-                    else if (bType.Equals("Chrome"))
-                    {
-                        cap = DesiredCapabilities.Chrome();
-                        cap.SetCapability(CapabilityType.BrowserName, "chrome");
+                if (bType.Equals(Enum.BrowserName.firefox))
+                    driver = new FirefoxDriver();
+                else if (bType.Equals(Enum.BrowserName.chrome.ToString()))
+                    driver = new ChromeDriver(GetDriversPath());
+                else if (bType.Equals(Enum.BrowserName.ie))
+                    driver = new InternetExplorerDriver(GetDriversPath());
 
-                        cap.SetCapability(CapabilityType.Platform, "WINDOWS");
-                    }
-                    driver = new RemoteWebDriver(new Uri("http://localhost:4444/wd/hub"), cap);
-
-                }
-                else
-                {
-                    if (bType.Equals(Enum.BrowserName.firefox))
-                        driver = new FirefoxDriver();
-                    else if (bType.Equals(Enum.BrowserName.chrome.ToString()))
-                        driver = new ChromeDriver(GetDriversPath());
-                    else if (bType.Equals(Enum.BrowserName.ie))
-                        driver = new InternetExplorerDriver(GetDriversPath());
-                }
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
                 driver.Manage().Window.Maximize();
                 return Enum.LogStatus.Passed;
@@ -80,7 +59,7 @@ namespace KeywordDrivenFramework.CommonRepository
         {
             try
             {
-                test.Log(Status.Info, "Navigating to - " + ConfigurationManager.AppSettings["URL"]);
+                // test.Log(Status.Info, "Navigating to - " + ConfigurationManager.AppSettings["URL"]);
                 driver.Url = ConfigurationManager.AppSettings["URL"];
                 return Enum.LogStatus.Passed;
             }
@@ -131,9 +110,10 @@ namespace KeywordDrivenFramework.CommonRepository
                 Console.WriteLine(e.ToString());
             }
         }
-        public void threadWait(int aWaitTimeInSec)
+        public Enum.LogStatus threadWait(int aWaitTimeInSec)
         {
             Thread.Sleep(aWaitTimeInSec);
+            return Enum.LogStatus.Passed;
         }
         public bool WaitUntillElementIsVisible(String aStringType, String aStringeValue, int timeOut)
         {
@@ -172,7 +152,7 @@ namespace KeywordDrivenFramework.CommonRepository
 
         public Enum.LogStatus ClickOnElementWhenElementFound(String aStringType, String aStringValue, String aStringName)
         {
-            test.Log(Status.Info, "Clicking on -" + aStringName);
+            //  test.Log(Status.Info, "Clicking on -" + aStringName);
             try
             {
                 IWebElement webElement = getWebElementByLocator(aStringType, aStringValue);
@@ -184,9 +164,9 @@ namespace KeywordDrivenFramework.CommonRepository
                 return status = Enum.LogStatus.Failed;
             }
         }
-        public Enum.LogStatus SendKeysForElement(String aStringType, String aStringValue, String aTestData,String aStringName)
+        public Enum.LogStatus SendKeysForElement(String aStringType, String aStringValue, String aTestData, String aStringName)
         {
-            test.Log(Status.Info, "Entering into - " + aStringName);
+            // test.Log(Status.Info, "Entering into - " + aStringName);
             try
             {
                 getElement(aStringType, aStringValue).SendKeys(aTestData);
@@ -202,9 +182,28 @@ namespace KeywordDrivenFramework.CommonRepository
                 return status = Enum.LogStatus.Failed;
             }
         }
-        public Enum.LogStatus SendKeysForWebElement(String aStringType, String aStringValue, String aTestData,String aStringName)
+
+        public Enum.LogStatus SendKeysForAElement(String aStringType, String aStringValue, String aTestData, String aStringName)
         {
-            test.Log(Status.Info, "Entering into - " + aStringName);
+            // test.Log(Status.Info, "Entering into - " + aStringName);
+            try
+            {
+                getElement(aStringType, aStringValue).SendKeys(aTestData + Keys.Enter);
+                return status = Enum.LogStatus.Passed;
+            }
+            catch (ElementNotVisibleException e)
+            {
+                Console.WriteLine(e.ToString());
+                return status = Enum.LogStatus.Failed;
+            }
+            catch (Exception)
+            {
+                return status = Enum.LogStatus.Failed;
+            }
+        }
+        public Enum.LogStatus SendKeysForWebElement(String aStringType, String aStringValue, String aTestData, String aStringName)
+        {
+            //  test.Log(Status.Info, "Entering into - " + aStringName);
             try
             {
                 getElement(aStringType, aStringValue).Clear();

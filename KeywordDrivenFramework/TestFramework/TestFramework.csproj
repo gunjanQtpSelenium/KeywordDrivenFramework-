@@ -70,10 +70,12 @@
   <ItemGroup>
     <Compile Include="Base\BaseTest.cs" />
     <Compile Include="TestCases\LoginTest.cs" />
+    <Compile Include="TestCases\SearchMobileTest.cs" />
     <Compile Include="TestClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="ExcelSheet\TestData.xlsx" />
     <None Include="license" />
     <None Include="packages.config" />

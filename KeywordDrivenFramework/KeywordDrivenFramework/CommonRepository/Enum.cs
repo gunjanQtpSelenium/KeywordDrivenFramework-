@@ -46,7 +46,7 @@ namespace KeywordDrivenFramework.CommonRepository
         public enum TestCaseName
         {
             LoginTest,
-            AddToCartTest
+            SearchMobileTest
         }
         public enum TestCasesColumn
         {

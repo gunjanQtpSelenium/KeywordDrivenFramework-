@@ -113,9 +113,6 @@
     <Compile Include="TestDataClasses\LoginPage.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="license" />
     <None Include="packages.config" />
   </ItemGroup>
