@@ -69,9 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BaseTest.cs" />
-    <Compile Include="TestCases\LoginTest.cs" />
+    <Compile Include="TestCases\RegistrationTest.cs" />
     <Compile Include="TestCases\SearchMobileTest.cs" />
-    <Compile Include="TestClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

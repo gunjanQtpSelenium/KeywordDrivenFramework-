@@ -18,7 +18,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KeywordDrivenFramework.CommonRepository
+namespace KeywordDrivenFramework.CommonUtilities
 {
     public class GeneralMethod
     {
@@ -494,6 +494,27 @@ namespace KeywordDrivenFramework.CommonRepository
             ((IJavaScriptExecutor)driver).ExecuteScript("window.open();");
             driver.SwitchTo().Window(driver.WindowHandles.Last());
             driver.Navigate().GoToUrl("https://google.com");
+        }
+        /// <summary>
+        /// Desc:Method is used to mouse hover without the click
+        /// </summary>
+        /// <param name="aStringType"></param>
+        /// <param name="aStringValue"></param>
+        /// <param name="aStringName"></param>
+        /// <returns></returns>
+        public Enum.LogStatus mouseHoverWithoutClick(String aStringType, String aStringValue, String aStringName)
+        {
+            //test.Log(Status.Info, "hover on - " + aStringName);
+            try
+            {
+                Actions action = new Actions(driver);
+                action.MoveToElement(getElement(aStringType, aStringValue)).Perform();
+                return Enum.LogStatus.Passed;
+            }
+            catch (Exception)
+            {
+                return Enum.LogStatus.Failed;
+            }
         }
     }
 }

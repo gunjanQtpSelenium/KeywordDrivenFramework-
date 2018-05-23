@@ -1,7 +1,7 @@
 ﻿using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports.Reporter.Configuration;
-using KeywordDrivenFramework.CommonRepository;
+using KeywordDrivenFramework.CommonUtilities;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

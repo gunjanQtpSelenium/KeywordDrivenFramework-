@@ -1,5 +1,5 @@
 ﻿using AventStack.ExtentReports;
-using KeywordDrivenFramework.CommonRepository;
+using KeywordDrivenFramework.CommonUtilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace KeywordDrivenFramework.TestDataClasses
 {
-    public class LoginPage: Keywords
+    public class RegistrationPage: Keywords
     {
-        public LoginPage(ExtentTest test) : base(test)
+        public RegistrationPage(ExtentTest test) : base(test)
         {
 
         }

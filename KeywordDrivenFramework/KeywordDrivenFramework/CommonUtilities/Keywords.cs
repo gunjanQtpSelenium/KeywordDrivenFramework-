@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KeywordDrivenFramework.CommonRepository
+namespace KeywordDrivenFramework.CommonUtilities
 {
     public class Keywords : GeneralMethod
     {
@@ -61,6 +61,9 @@ namespace KeywordDrivenFramework.CommonRepository
                             break;
                         case "wait":
                             resultStatus = threadWait(5000);
+                            break;
+                        case "hover":
+                            resultStatus = mouseHoverWithoutClick(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault(), locatorName);
                             break;
                     }
                     if (!resultStatus.Equals(Enum.LogStatus.Passed))

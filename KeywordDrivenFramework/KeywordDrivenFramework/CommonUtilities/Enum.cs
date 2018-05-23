@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KeywordDrivenFramework.CommonRepository
+namespace KeywordDrivenFramework.CommonUtilities
 {
     public class Enum
     {
@@ -45,7 +45,7 @@ namespace KeywordDrivenFramework.CommonRepository
         }
         public enum TestCaseName
         {
-            LoginTest,
+            RegistrationTest,
             SearchMobileTest
         }
         public enum TestCasesColumn

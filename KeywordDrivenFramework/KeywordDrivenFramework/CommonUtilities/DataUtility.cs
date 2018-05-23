@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KeywordDrivenFramework.CommonRepository
+namespace KeywordDrivenFramework.CommonUtilities
 {
     public class DataUtility
     {
