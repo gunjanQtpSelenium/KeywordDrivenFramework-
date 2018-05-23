@@ -155,6 +155,7 @@ namespace KeywordDrivenFramework.CommonUtilities
             //  test.Log(Status.Info, "Clicking on -" + aStringName);
             try
             {
+                //driver.FindElement(By.XPath("//*[@id='nav-search-submit-text']")).Click();
                 IWebElement webElement = getWebElementByLocator(aStringType, aStringValue);
                 webElement.Click();
                 return status = Enum.LogStatus.Passed;
@@ -356,10 +357,11 @@ namespace KeywordDrivenFramework.CommonUtilities
                 return Enum.LogStatus.Skipped;
             }
         }
-        public void jsClick(String aStringValue)
+        public Enum.LogStatus jsClick(String aStringType,String aStringValue)
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("arguments[0].click();", aStringValue);
+            return Enum.LogStatus.Passed;
         }
 
         /// <summary>
