@@ -14,7 +14,6 @@ namespace KeywordDrivenFramework.TestDataClasses
             ClickOnElementWhenElementFound("xpath", "//*[@id='nav-link-accountList']", "a_YourAccount");
             SendKeysForAElement("id", "ap_email", testData["Email"], "txt_Email");
             SendKeysForAElement("id", "ap_password", testData["Password"], "txt_Password");
-
         }
 
         public Enum.LogStatus verifyLogin(Dictionary<string, string> testData)
@@ -27,7 +26,6 @@ namespace KeywordDrivenFramework.TestDataClasses
             }
             else
                 actualResult = "Failure";
-
             if (!actualResult.Equals(testData["ExpectedResult"]))
                 return Enum.LogStatus.Failed;
             else
