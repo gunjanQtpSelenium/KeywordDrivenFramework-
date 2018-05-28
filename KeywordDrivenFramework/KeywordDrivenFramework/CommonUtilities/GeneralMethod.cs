@@ -1,5 +1,6 @@
 ﻿
 using AventStack.ExtentReports;
+using KeywordDrivenFramework.ReportReader;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -22,12 +23,12 @@ namespace KeywordDrivenFramework.CommonUtilities
 {
     public class GeneralMethod
     {
-        public IWebDriver driver;
+        public static IWebDriver driver;
         public ExtentTest test;
-        public GeneralMethod(ExtentTest test)
-        {
-            this.test = test;
-        }
+        //public GeneralMethod(ExtentTest test)
+        //{
+        //    this.test = test;
+        //}
 
         public string ScenarioName = string.Empty;
         public string TestCaseName = string.Empty;
@@ -35,7 +36,7 @@ namespace KeywordDrivenFramework.CommonUtilities
         Enum.LogStatus status;
         public Enum.LogStatus openBrowser(string bType)
         {
-            //  test.Log(Status.Info, "Opening browser- " + bType);
+            ExtentTestManager._parentTest.Log(Status.Info, "Opening browser- " + bType);
             try
             {
 
@@ -89,7 +90,25 @@ namespace KeywordDrivenFramework.CommonUtilities
             }
             return e;
         }
-
+        public IList<IWebElement> getElements(string locatorKey, string locatorValue)
+        {
+            IList<IWebElement> e = null;
+            try
+            {
+                if (locatorKey == Enum.LocatorType.id.ToString())
+                    e = driver.FindElements(By.Id(locatorValue));
+                else if (locatorKey == Enum.LocatorType.xpath.ToString())
+                    e = driver.FindElements(By.XPath(locatorValue));
+                else if (locatorKey == Enum.LocatorType.name.ToString())
+                    e = driver.FindElements(By.Name(locatorValue));
+            }
+            catch (Exception)
+            {
+                //   reportFailure("Failure in element extraction ");
+                Assert.Fail("Failure in element extraction " + locatorValue);
+            }
+            return e;
+        }
         public void maximiseBrowser()
         {
             driver.Manage().Window.Maximize();
@@ -152,7 +171,7 @@ namespace KeywordDrivenFramework.CommonUtilities
 
         public Enum.LogStatus ClickOnElementWhenElementFound(String aStringType, String aStringValue, String aStringName)
         {
-            //  test.Log(Status.Info, "Clicking on -" + aStringName);
+            ExtentTestManager._parentTest.Log(Status.Info, "Clicking on -" + aStringName);
             try
             {
                 //driver.FindElement(By.XPath("//*[@id='nav-search-submit-text']")).Click();
@@ -167,7 +186,7 @@ namespace KeywordDrivenFramework.CommonUtilities
         }
         public Enum.LogStatus SendKeysForElement(String aStringType, String aStringValue, String aTestData, String aStringName)
         {
-            // test.Log(Status.Info, "Entering into - " + aStringName);
+            ExtentTestManager._parentTest.Log(Status.Info, "Entering into - " + aStringName);
             try
             {
                 getElement(aStringType, aStringValue).SendKeys(aTestData);
@@ -186,7 +205,7 @@ namespace KeywordDrivenFramework.CommonUtilities
 
         public Enum.LogStatus SendKeysForAElement(String aStringType, String aStringValue, String aTestData, String aStringName)
         {
-            // test.Log(Status.Info, "Entering into - " + aStringName);
+            ExtentTestManager._parentTest.Log(Status.Info, "Entering into - " + aStringName);
             try
             {
                 getElement(aStringType, aStringValue).SendKeys(aTestData + Keys.Enter);
@@ -204,7 +223,7 @@ namespace KeywordDrivenFramework.CommonUtilities
         }
         public Enum.LogStatus SendKeysForWebElement(String aStringType, String aStringValue, String aTestData, String aStringName)
         {
-            //  test.Log(Status.Info, "Entering into - " + aStringName);
+            ExtentTestManager._parentTest.Log(Status.Info, "Entering into - " + aStringName);
             try
             {
                 getElement(aStringType, aStringValue).Clear();
@@ -283,7 +302,7 @@ namespace KeywordDrivenFramework.CommonUtilities
             act.MoveToElement(getElement(aStringType, aStringValue)).Click();
             return Enum.LogStatus.Passed;
         }
-        public string selectValueFromDropdownStringText(String aStringType, String aStringValue, string value)
+        public string selectValueFromDropdownByText(String aStringType, String aStringValue, string value)
         {
             try
             {
@@ -296,7 +315,7 @@ namespace KeywordDrivenFramework.CommonUtilities
                 return null;
             }
         }
-        public int selectValueStringIndex(String aStringType, String aStringValue, int index)
+        public int selectValueByIndex(String aStringType, String aStringValue, int index)
         {
             try
             {
@@ -358,7 +377,7 @@ namespace KeywordDrivenFramework.CommonUtilities
                 return Enum.LogStatus.Skipped;
             }
         }
-        public Enum.LogStatus jsClick(String aStringType,String aStringValue)
+        public Enum.LogStatus jsClick(String aStringType, String aStringValue)
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("arguments[0].click();", aStringValue);
@@ -386,6 +405,7 @@ namespace KeywordDrivenFramework.CommonUtilities
                 throw;
             }
         }
+
         /// <summary>
         /// Desc:Method is used to GetDrivers path
         /// </summary>
@@ -398,6 +418,7 @@ namespace KeywordDrivenFramework.CommonUtilities
             driverPath = driverPath + "Driver";
             return driverPath;
         }
+
         /// <summary>
         /// Desc:Method is used to get generated report's path
         /// </summary>
@@ -410,6 +431,7 @@ namespace KeywordDrivenFramework.CommonUtilities
             reportPath = reportPath + "ResultReport\\ExtentReport.html";
             return reportPath;
         }
+
         /// <summary>
         /// Desc:Method is used to Get Screenshot's Path
         /// </summary>
@@ -422,6 +444,7 @@ namespace KeywordDrivenFramework.CommonUtilities
             screenshotPath = screenshotPath + @"ResultReport\Screenshots";
             return screenshotPath;
         }
+
         /// <summary>
         /// Desc:Method is used to Get Report Folder's Path
         /// </summary>
@@ -434,6 +457,7 @@ namespace KeywordDrivenFramework.CommonUtilities
             reportPath = reportPath + "ResultReport";
             return reportPath;
         }
+
         /// <summary>
         /// Desc:Method is used to Get zip Folder's Path
         /// </summary>

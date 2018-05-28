@@ -46,7 +46,8 @@ namespace KeywordDrivenFramework.CommonUtilities
         public enum TestCaseName
         {
             RegistrationTest,
-            SearchMobileTest
+            SearchMobileTest,
+            LoginTest
         }
         public enum TestCasesColumn
         {

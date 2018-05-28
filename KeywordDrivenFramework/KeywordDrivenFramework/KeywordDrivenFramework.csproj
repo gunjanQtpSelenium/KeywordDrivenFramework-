@@ -110,6 +110,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportReader\ExtentManager.cs" />
     <Compile Include="ReportReader\ExtentTestManager.cs" />
+    <Compile Include="TestDataClasses\LoginPage.cs" />
     <Compile Include="TestDataClasses\RegistrationPage.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +120,7 @@
   <ItemGroup>
     <Content Include="extent-config.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

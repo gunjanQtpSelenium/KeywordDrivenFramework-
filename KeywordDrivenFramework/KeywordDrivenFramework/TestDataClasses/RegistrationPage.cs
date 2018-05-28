@@ -10,13 +10,15 @@ namespace KeywordDrivenFramework.TestDataClasses
 {
     public class RegistrationPage: Keywords
     {
-        public RegistrationPage(ExtentTest test) : base(test)
-        {
+      
 
+<<<<<<< HEAD
         }
         public void Data()
         {
             ClickOnElementWhenElementFound("","","");
         }
+=======
+>>>>>>> 7f65f351b7e52b6bf047227a165eab149e39b82c
     }
 }
