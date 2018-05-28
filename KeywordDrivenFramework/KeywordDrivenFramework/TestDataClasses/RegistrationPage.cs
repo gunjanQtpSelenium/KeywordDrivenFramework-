@@ -14,5 +14,9 @@ namespace KeywordDrivenFramework.TestDataClasses
         {
 
         }
+        public void Data()
+        {
+            ClickOnElementWhenElementFound("","","");
+        }
     }
 }
