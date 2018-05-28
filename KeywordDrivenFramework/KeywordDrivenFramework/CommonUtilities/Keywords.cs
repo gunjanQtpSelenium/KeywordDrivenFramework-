@@ -1,4 +1,6 @@
 ﻿using AventStack.ExtentReports;
+using KeywordDrivenFramework.ReportReader;
+using KeywordDrivenFramework.TestDataClasses;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -11,10 +13,11 @@ namespace KeywordDrivenFramework.CommonUtilities
 {
     public class Keywords : GeneralMethod
     {
-        public Keywords(ExtentTest test) : base(test)
-        {
+        //public Keywords(ExtentTest test) : base(test)
+        //{
 
-        }
+        //}
+
         /// <summary>
         /// Desc:Method is used to read excel sheets and execute the keywords accordingly
         /// </summary>
@@ -23,6 +26,8 @@ namespace KeywordDrivenFramework.CommonUtilities
         /// <param name="testData"></param>
         public void executeKeywords(string testUnderExecution, ExcelReader xls, Dictionary<string, string> testData)
         {
+            SearchItemPage sPage = new SearchItemPage();
+            LoginPage lPgae = new LoginPage();
             string KeywordsSheet = Enum.Sheets.Keywords.ToString();
             int rows = xls.getRowCount(KeywordsSheet);
             // app.reportFailure("xxxxx");
@@ -57,7 +62,7 @@ namespace KeywordDrivenFramework.CommonUtilities
                             resultStatus = ClickOnElementWhenElementFound(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault(), locatorName);
                             break;
                         case "input":
-                            resultStatus = SendKeysForElement(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault(), data,locatorName);
+                            resultStatus = SendKeysForElement(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault(), data, locatorName);
                             break;
                         case "wait":
                             resultStatus = threadWait(5000);
@@ -74,6 +79,19 @@ namespace KeywordDrivenFramework.CommonUtilities
                         case "inputAndEnter":
                             resultStatus = SendKeysForAElement(locatorData.Keys.FirstOrDefault(), locatorData.Values.FirstOrDefault(), data, locatorName);
                             break;
+                        case "searchMobileAndSelect":
+                            sPage.searchMobileAndSelect(xls, data);
+                            break;
+                        case "amazonLogin":
+                            lPgae.amazonLogin(testData);
+                            break;
+                        case "verifyLogin":
+                            lPgae.verifyLogin(testData);
+                            break;
+                        case "verifyItemAddedToCart":
+                            sPage.verifyItemAddedToCart();
+                            break;
+
                     }
                     if (!resultStatus.Equals(Enum.LogStatus.Passed))
                     {

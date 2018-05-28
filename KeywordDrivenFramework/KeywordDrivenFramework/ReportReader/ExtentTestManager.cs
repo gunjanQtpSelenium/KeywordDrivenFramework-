@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KeywordDrivenFramework.ReportReader
 {
-    public class ExtentTestManager
+    public static class ExtentTestManager
     {
         [ThreadStatic]
         public static ExtentTest _parentTest;

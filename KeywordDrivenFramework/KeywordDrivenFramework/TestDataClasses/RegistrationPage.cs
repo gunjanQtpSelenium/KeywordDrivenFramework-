@@ -10,9 +10,7 @@ namespace KeywordDrivenFramework.TestDataClasses
 {
     public class RegistrationPage: Keywords
     {
-        public RegistrationPage(ExtentTest test) : base(test)
-        {
+      
 
-        }
     }
 }

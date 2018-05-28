@@ -1,6 +1,7 @@
 ﻿using KeywordDrivenFramework.CommonUtilities;
 using KeywordDrivenFramework.ReportReader;
 using NUnit.Framework;
+//using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,20 +11,20 @@ using TestFramework.Base;
 namespace TestFramework.TestCases
 {
     [TestFixture]
-    public class RegistrationTest : BaseTest
+    public class LoginTest : BaseTest
     {
         [Test, TestCaseSource("getData")]
-        public void RegistrationTestScenario(Dictionary<string, string> data)
+        public void loginTest(Dictionary<string, string> data)
         {
             ExtentTestManager.CreateParentTest(GetType().Name + '-' + data["Browser"].ToString());
             try
             {
-                if (DataUtility.isSkip(xls, Enum.TestCaseName.RegistrationTest.ToString()) || data["Runmode"].Equals("N"))
+                if (DataUtility.isSkip(xls, Enum.TestCaseName.LoginTest.ToString()) || data["Runmode"].Equals("N"))
                 {
                     Assert.Ignore("Skipping the test as runmode is NO");
                 }
                 app = new Keywords();
-                app.executeKeywords(Enum.TestCaseName.RegistrationTest.ToString(), xls, data);
+                app.executeKeywords(Enum.TestCaseName.LoginTest.ToString(), xls, data);
                 ExtentManager.Instance.Flush();
             }
             catch (System.Exception)
@@ -38,7 +39,7 @@ namespace TestFramework.TestCases
         /// <returns></returns>
         public static object[] getData()
         {
-            return DataUtility.getData(xls, Enum.TestCaseName.RegistrationTest.ToString());
+            return DataUtility.getData(xls, Enum.TestCaseName.LoginTest.ToString());
         }
     }
 }

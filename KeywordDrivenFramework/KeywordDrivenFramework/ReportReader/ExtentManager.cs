@@ -18,26 +18,34 @@ namespace KeywordDrivenFramework.ReportReader
         public static ExtentReports Instance { get { return _lazy.Value; } }
         static ExtentManager()
         {
-            string OS = ConfigurationManager.AppSettings["OS"].ToString();
-            string HostName = ConfigurationManager.AppSettings["HostName"].ToString();
-            string Environment = ConfigurationManager.AppSettings["Environment"].ToString();
-            string UserName = ConfigurationManager.AppSettings["UserName"].ToString();
-            DirectoryInfo dirScreenshotPath = new DirectoryInfo(GeneralMethod.GetScreenshotPath());
-            foreach (FileInfo fi in dirScreenshotPath.GetFiles())
+            try
             {
-                fi.Delete();
+                //ExtentTestManager._parentTest.Log(Status.Info, "Opening browser- " + bType);
+                string OS = ConfigurationManager.AppSettings["OS"].ToString();
+                string HostName = ConfigurationManager.AppSettings["HostName"].ToString();
+                string Environment = ConfigurationManager.AppSettings["Environment"].ToString();
+                string UserName = ConfigurationManager.AppSettings["UserName"].ToString();
+                DirectoryInfo dirScreenshotPath = new DirectoryInfo(GeneralMethod.GetScreenshotPath());
+                foreach (FileInfo fi in dirScreenshotPath.GetFiles())
+                {
+                    fi.Delete();
+                }
+                var htmlReporter = new ExtentHtmlReporter(GeneralMethod.GetReportPath());
+                htmlReporter.Configuration().ChartLocation = ChartLocation.Bottom;
+                htmlReporter.Configuration().ChartVisibilityOnOpen = true;
+                htmlReporter.Configuration().DocumentTitle = "Extent/NUnit Samples";
+                htmlReporter.Configuration().ReportName = "Extent/NUnit Samples";
+                htmlReporter.Configuration().Theme = Theme.Standard;
+                Instance.AttachReporter(htmlReporter);
+                Instance.AddSystemInfo("os", OS);
+                Instance.AddSystemInfo("Host Name", HostName);
+                Instance.AddSystemInfo("Environment", Environment);
+                Instance.AddSystemInfo("User Name", UserName);
             }
-            var htmlReporter = new ExtentHtmlReporter(GeneralMethod.GetReportPath());
-            htmlReporter.Configuration().ChartLocation = ChartLocation.Bottom;
-            htmlReporter.Configuration().ChartVisibilityOnOpen = true;
-            htmlReporter.Configuration().DocumentTitle = "Extent/NUnit Samples";
-            htmlReporter.Configuration().ReportName = "Extent/NUnit Samples";
-            htmlReporter.Configuration().Theme = Theme.Standard;
-            Instance.AttachReporter(htmlReporter);
-            Instance.AddSystemInfo("os", OS);
-            Instance.AddSystemInfo("Host Name", HostName);
-            Instance.AddSystemInfo("Environment", Environment);
-            Instance.AddSystemInfo("User Name", UserName);
+            catch (Exception e)
+            {
+                throw;
+            }
         }
         private ExtentManager()
         {
